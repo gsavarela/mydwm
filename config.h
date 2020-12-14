@@ -11,12 +11,12 @@ static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
 
 /* COLORSCHEMES */
-static const char normfgcolor[]       = "#bbbbbb";
-static const char normbgcolor[]       = "#222222";
-static const char normbdcolor[]       = "#444444";
-static const char selfgcolor[]        = "#eeeeee";
-static const char selbgcolor[]        = "#005577";
-static const char selbdcolor[]        = "#005577";
+static const char normfgcolor[]       = "#282828";
+static const char normbgcolor[]       = "#504945";
+static const char normbdcolor[]       = "#ebdbb2";
+static const char selfgcolor[]        = "#282828";
+static const char selbgcolor[]        = "#d79921";
+static const char selbdcolor[]        = "#d79921";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { normfgcolor, normbgcolor, normbdcolor },
