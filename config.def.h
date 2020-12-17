@@ -11,16 +11,16 @@ static const char *fonts[]          = { "monospace:size=10" };
 static const char dmenufont[]       = "monospace:size=10";
 
 /* COLORSCHEMES */
-static const char normfgcolor[]       = "#282828";
-static const char normbgcolor[]       = "#504945";
-static const char normbdcolor[]       = "#ebdbb2";
-static const char selfgcolor[]        = "#282828";
+static const char normbgcolor[]       = "#282828";
+static const char normbordercolor[]   = "#504945";
+static const char normfgcolor[]       = "#ebdbb2";
 static const char selbgcolor[]        = "#d79921";
-static const char selbdcolor[]        = "#d79921";
+static const char selbordercolor[]    = "#d79921";
+static const char selfgcolor[]        = "#282828";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { normfgcolor, normbgcolor, normbdcolor },
-	[SchemeSel]  = { selfgcolor, selbgcolor,  selbdcolor  },
+	[SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
+	[SchemeSel]  = { selfgcolor, selbgcolor,  selbordercolor  },
 };
 
 /* tagging */
@@ -61,7 +61,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbdcolor, "-sf", selfgcolor, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 #include "shiftview.c"
