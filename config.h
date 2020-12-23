@@ -65,6 +65,7 @@ static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont,
 static const char *termcmd[]  = { "st", NULL };
 
 #include "shiftview.c"
+#include <X11/XF86keysym.h>
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -95,8 +96,6 @@ static Key keys[] = {
 	{ MODKEY,                       XK_minus,  setgaps,        {.i = -1 } },
 	{ MODKEY,                       XK_equal,  setgaps,        {.i = +1 } },
 	{ MODKEY|ShiftMask,             XK_equal,  setgaps,        {.i = 0  } },
-	{ MODKEY,                       XK_z,      spawn,          SHCMD("pulsemixer --change-volume +10") },
-	{ MODKEY|ShiftMask,             XK_z,      spawn,          SHCMD("pulsemixer --change-volume -10") },
 	TAGKEYS(                        XK_1,                      0)
 	TAGKEYS(                        XK_2,                      1)
 	TAGKEYS(                        XK_3,                      2)
@@ -107,6 +106,10 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+    /* Special Keyboard Functions */
+    { 0, XF86XK_AudioRaiseVolume,   spawn,          SHCMD("pulsemixer --change-volume +5") },
+    { 0, XF86XK_AudioLowerVolume,   spawn,          SHCMD("pulsemixer --change-volume -5") },
+    { 0, XF86XK_AudioMute,          spawn,          SHCMD("pulsemixer --toggle-mute") },
 };
 
 /* button definitions */
