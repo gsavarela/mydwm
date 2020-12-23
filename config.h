@@ -107,9 +107,9 @@ static Key keys[] = {
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
     /* Special Keyboard Functions */
-    { 0, XF86XK_AudioRaiseVolume,   spawn,          SHCMD("pulsemixer --change-volume +5") },
-    { 0, XF86XK_AudioLowerVolume,   spawn,          SHCMD("pulsemixer --change-volume -5") },
-    { 0, XF86XK_AudioMute,          spawn,          SHCMD("pulsemixer --toggle-mute") },
+    { 0, XF86XK_AudioRaiseVolume,   spawn,          SHCMD("pamixer -i 5") },
+    { 0, XF86XK_AudioLowerVolume,   spawn,          SHCMD("pamixer -d 5") },
+    { 0, XF86XK_AudioMute,          spawn,          SHCMD("pamixer -t") },
 };
 
 /* button definitions */
