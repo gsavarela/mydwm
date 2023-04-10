@@ -1,0 +1,3 @@
+[submodule "mydwm"]
+	path = mydwm
+	url = git@github.com:gsavarela/mydwm.git

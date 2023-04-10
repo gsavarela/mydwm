@@ -1,49 +1,31 @@
-# DWM
-[dwm](https://dl.suckless.org/dwm)  is an extremely fast, small, and dynamic window manager for X.
+# My Dynamic Window Manager
 
-## Patches
+Uses [dwmblocks-async](#dwmblocks-async) as status bar
 
-* [gruvbox-theme](https://gitlab.com/zagyarakushi)
-* [fullgaps](https://dwm.suckless.org/patches/fullgaps/dwm-fullgaps-6.2.diff)
+## Compile Suckless Tools
 
-## Requirements
-In order to build dwm you need the Xlib header files.
-
-
-## Installation
-Edit config.mk to match your local setup (dwm is installed into
-the /usr/local namespace by default).
-
-Afterwards enter the following command to build and install dwm (if
-necessary as root):
-
-make clean install
+```
+cd dwm && sudo make clean install && cd .. \
+cd dwmblocks && sudo make clean install && cd .. \
+```
 
 
-## Running
-Add the following line to your .xinitrc to start dwm using startx:
 
-`exec dwm`
+## Dwmblocks-async<a name="dwmblocks-async"></a> 
 
-In order to connect dwm to a specific display, make sure that
-the DISPLAY environment variable is set correctly, e.g.:
-
-`DISPLAY=foo.bar:1 exec dwm`
-
-(This will start dwm on display :1 of the host foo.bar.)
-
-In order to display status info in the bar, you can do something
-like this in your .xinitrc:
+A modular statusbar for `dwm` written in C. You may think of it as `i3blocks`, but for `dwm`.
+Credits to [UtkarshVerma](https://github.com/UtkarshVerma/dwmblocks-async) 
 
 
-    while xsetroot -name "`date` `uptime | sed 's/.*,//'`"
-    do
-        sleep 1
-    done &
-    exec dwm
+### Features
+
+- Modular
+- Lightweight
+- Suckless
+- Blocks are clickable
+- Blocks are loaded asynchronously
+- Each block can be externally triggered to update itself
+- Compatible with `i3blocks` scripts
 
 
-## Configuration
 
-The configuration of dwm is done by creating a custom config.h
-and (re)compiling the source code.
