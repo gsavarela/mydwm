@@ -1,3 +1,7 @@
 *.o
-dwm/*dwm
+dwm/dwm
+dwm/dwm-msg
+*config.h
+*patches.h
 *.orig
+*.rej
