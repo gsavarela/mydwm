@@ -1,7 +1,7 @@
 # My Dynamic Window Manager
 
-Uses [dwm-flexipatch](https://github.com/bakkeby/dwm-flexipatch) as dwm version
-Uses [dwmblocks-async](#dwmblocks-async) as status bar
+Uses [dwm-flexipatch](https://github.com/bakkeby/dwm-flexipatch) as dwm version.
+Uses [dwmblocks-async](#dwmblocks-async) as status bar.
 
 ## Compile Suckless Tools
 
@@ -32,6 +32,30 @@ VANITYGAPS_MONOCLE_PATCH 1
 XRDB_PATCH 1
 ```
 
+Include a theme selector with support for themes:
+> ./scripts/theme_selector
+
+Themes:
+
+* dracula
+* gruvbox
+* nord 
+
+Programs:
+
+* dwm 
+* dmenu
+* st
+* GTK
+* vim
+ 
+
+Known dependencies:
+
+* [dmenu](https://tools.suckless.org/dmenu/)
+* [myst](https://github.com/gsavarela/myst)
+
+
 ## Dwmblocks-async<a name="dwmblocks-async"></a> 
 
 A modular statusbar for `dwm` written in C. You may think of it as `i3blocks`, but for `dwm`.
@@ -48,5 +72,9 @@ Credits to [UtkarshVerma](https://github.com/UtkarshVerma/dwmblocks-async)
 - Each block can be externally triggered to update itself
 - Compatible with `i3blocks` scripts
 
+## TODO:
 
-
+- Add myst as git sub module.
+- Add dotbot bootstrap script. 
+- Add more fonts.
+- Add more themes.

@@ -1,0 +1,17 @@
+! source dwm colorscheme !
+#include ".config/dwm/xresources/theme"
+
+! source dmenu colorscheme !
+#include ".config/dmenu/xresources/theme"
+
+! source st configurations !
+#include ".config/myst/xresources/theme"
+
+! fonts config !
+Xft.dpi: 120
+Xft.antialias:	1
+Xft.hinting:	1
+Xft.autohint:	0
+Xft.hintstyle:	hintslight
+Xft.rgba:	rgb
+Xft.lcdfilter:	lcddefault

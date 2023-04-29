@@ -1,0 +1,63 @@
+#!/bin/sh
+
+# Directory
+dwm_dir="$HOME/.config/dwm"
+dmenu_dir="$HOME/.config/dmenu"
+st_dir="$HOME/.config/myst"
+
+change_theme()
+{
+	cp ${dwm_dir}/xresources/$1 ${dwm_dir}/xresources/theme
+	cp ${dmenu_dir}/xresources/$1 ${dmenu_dir}/xresources/theme
+	cp ${st_dir}/xresources/$1 ${st_dir}/xresources/theme
+	
+	xrdb -merge -I$HOME ~/.Xresources # reload Xresources
+
+  # calls xrdb function in dwm
+  kill -HUP $(pidof dwm)
+
+  # update st
+  kill -USR1 $(pidof st)
+
+}
+change_gtk_theme() 
+{
+   sed -e "s/^gtk-theme-name=.*/gtk-theme-name="$@"/" -i ~/.config/gtk-3.0/settings.ini
+   sed -e "s/^gtk-theme-name=.*/gtk-theme-name=\""$@"\"/" -i ~/.config/gtk-2.0/settings.ini
+}
+change_vim_theme()
+{
+  sed -i "s/colorscheme\ .*/colorscheme $@/" ~/.vimrc
+}
+
+# Theme
+cancel="窱 Cancel"
+theme1=" Dracula"
+theme2=" Gruvbox"
+theme3=" Nord"
+
+# Variable to pass to dmenu or rofi
+option="$cancel\n$theme1\n$theme2\n$theme3\n$theme4\n$theme5\n$theme6\n$theme7"
+
+select="$(echo -e "$option" | dmenu -p "Choose a theme" )"
+
+case $select in
+	$theme1)
+		feh --random --bg-fill $HOME/.config/wallpaper/dracula
+		change_theme dracula
+		change_gtk_theme Dracula
+		change_vim_theme dracula
+		;;
+	$theme2)
+		feh --random --bg-fill $HOME/.config/wallpaper/gruvbox
+		change_theme gruvbox
+		change_gtk_theme Gruvbox-Dark
+		change_vim_theme gruvbox
+		;;
+	$theme3)
+		feh --random --bg-fill $HOME/.config/wallpaper/nord
+		change_theme nord
+		change_gtk_theme Nord
+		change_vim_theme nord
+		;;
+esac
