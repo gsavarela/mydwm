@@ -7,11 +7,12 @@ st_dir="$HOME/.config/myst"
 
 change_theme()
 {
-	cp ${dwm_dir}/xresources/$1 ${dwm_dir}/xresources/theme
-	cp ${dmenu_dir}/xresources/$1 ${dmenu_dir}/xresources/theme
-	cp ${st_dir}/xresources/$1 ${st_dir}/xresources/theme
+	cp ${dwm_dir}/$1 ${dwm_dir}/theme
+	cp ${dmenu_dir}/$1 ${dmenu_dir}/theme
+	cp ${st_dir}/$1 ${st_dir}/theme
 	
-	xrdb -merge -I$HOME ~/.Xresources # reload Xresources
+	# xrdb -merge -I$HOME ~/.Xresources # reload Xresources
+	xrdb -merge -I$HOME ~/.config/X11/Xresources # reload Xresources
 
   # calls xrdb function in dwm
   kill -HUP $(pidof dwm)

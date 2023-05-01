@@ -1,0 +1,37 @@
+# dotbot
+#
+# https://github.com/anishathalye/dotbot
+#
+- defaults:
+    link:
+      create: true
+      relink: true
+- clean: 
+    ~/.config:
+      recursive: True
+    ~/.local: 
+      recursive: True
+
+- link:
+    ~/.config/dwm: 
+      path: dwm/xresources/*
+      glob: True
+    ~/.config/dmenu: 
+      path: dmenu/xresources/*
+      glob: True
+    ~/.local/bin:
+      path: scripts/*
+      glob: True
+    ~/.local/bin/dwm: dwm/dwm
+    ~/.local/bin/dwmblocks: dwmblocks/dwmblocks
+    ~/.local/bin/dmenu: dmenu/dmenu
+    ~/.local/bin/dmenu_path: dmenu/dmenu_path
+    ~/.local/bin/dmenu_run: dmenu/dmenu_run
+
+- create:
+    - ~/.config/dwm
+    - ~/.config/dmenu
+    - ~/.local/bin
+
+- shell:
+    - [git submodule update --init --recursive, Installing submodules]

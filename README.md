@@ -1,13 +1,51 @@
 # My Dynamic Window Manager
 
-Uses [dwm-flexipatch](https://github.com/bakkeby/dwm-flexipatch) as dwm version.
-Uses [dwmblocks-async](#dwmblocks-async) as status bar.
+* Features a theme selector (credits: [Junnunkarim](https://github.com/junnunkarim/dotfiles-linux)).
+* Uses [dwm-flexipatch](https://github.com/bakkeby/dwm-flexipatch) as dwm version.
+* Uses [dmenu-flexipatch](https://github.com/bakkeby/dmenu-flexipatch) as program launcher.
+* Uses [dwmblocks-async](#dwmblocks-async) as status bar.
 
-## Compile Suckless Tools
+Supported themes:
+
+* dracula
+* gruvbox
+* nord 
+
+Supported programs:
+
+* dwm 
+* dmenu
+* st
+* GTK
+* vim
+
+## Installation
+
+
+### 1. Compile Suckless Tools
 
 ```
 cd dwm && sudo make clean install && cd .. \
 cd dwmblocks && sudo make clean install && cd .. \
+cd dmenu && sudo make clean install
+```
+
+### 2. Bootstrap build 
+
+#### 2.1 Add [dotbot](https://github.com/anishathalye/dotbot) as a submodule.
+
+```
+git submodule add https://github.com/anishathalye/dotbot
+git config -f .gitmodules submodule.dotbot.ignore dirty # ignore dirty commits in the submodule
+cp dotbot/tools/git-submodule/install .
+```
+
+#### 2.2 Run install script.
+
+The install script should generate symlinks to  `~/.config` and `~/.local` folder. 
+
+```
+./install.sh
 ```
 
 ## Dwm Flexipatch
@@ -32,22 +70,6 @@ VANITYGAPS_MONOCLE_PATCH 1
 XRDB_PATCH 1
 ```
 
-Include a theme selector with support for themes:
-> ./scripts/theme_selector
-
-Themes:
-
-* dracula
-* gruvbox
-* nord 
-
-Programs:
-
-* dwm 
-* dmenu
-* st
-* GTK
-* vim
  
 
 Known dependencies:
@@ -74,7 +96,7 @@ Credits to [UtkarshVerma](https://github.com/UtkarshVerma/dwmblocks-async)
 
 ## TODO:
 
-- Add myst as git sub module.
-- Add dotbot bootstrap script. 
-- Add more fonts.
-- Add more themes.
+- [] Add myst as git sub module.
+- [x] Add dotbot bootstrap script. 
+- [] Add more fonts.
+- [] Add more themes.

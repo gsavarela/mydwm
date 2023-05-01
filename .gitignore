@@ -1,3 +1,4 @@
+dotbot/
 *.o
 dwm/dwm
 dwm/dwm-msg
@@ -5,3 +6,4 @@ dwm/dwm-msg
 *patches.h
 *.orig
 *.rej
+**/theme
