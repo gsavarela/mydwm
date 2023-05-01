@@ -3,7 +3,7 @@
 # Directory
 dwm_dir="$HOME/.config/dwm"
 dmenu_dir="$HOME/.config/dmenu"
-st_dir="$HOME/.config/myst"
+st_dir="$HOME/.config/st"
 
 change_theme()
 {

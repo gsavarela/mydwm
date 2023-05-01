@@ -19,6 +19,7 @@
     ~/.config/dmenu: 
       path: dmenu/xresources/*
       glob: True
+    ~/.config/X11/Xresources: Xresources
     ~/.local/bin:
       path: scripts/*
       glob: True
@@ -28,9 +29,11 @@
     ~/.local/bin/dmenu_path: dmenu/dmenu_path
     ~/.local/bin/dmenu_run: dmenu/dmenu_run
 
+
 - create:
     - ~/.config/dwm
     - ~/.config/dmenu
+    - ~/.config/X11
     - ~/.local/bin
 
 - shell:

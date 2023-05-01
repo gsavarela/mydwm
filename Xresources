@@ -1,11 +1,11 @@
 ! source dwm colorscheme !
-#include ".config/dwm/xresources/theme"
+#include ".config/dwm/theme"
 
 ! source dmenu colorscheme !
-#include ".config/dmenu/xresources/theme"
+#include ".config/dmenu/theme"
 
 ! source st configurations !
-#include ".config/myst/xresources/theme"
+#include ".config/st/theme" 
 
 ! fonts config !
 Xft.dpi: 120
