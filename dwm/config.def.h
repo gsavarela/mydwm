@@ -864,7 +864,6 @@ static const char *dmenucmd[] = {
 	NULL
 };
 static const char *termcmd[]  = { "st", NULL };
-static const char *launcher_cmd[]  = { ".bin/rofi_run", NULL };
 
 #if BAR_STATUSCMD_PATCH
 #if BAR_DWMBLOCKS_PATCH
@@ -1288,9 +1287,6 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                                  7)
 	TAGKEYS(                        XK_9,                                  8)
 
-  //---------- System shortcuts (super / super + shift) ----------//
-  //
- { MODKEY,                       XK_d,          spawn,                  {.v = launcher_cmd } },
 };
 
 #if KEYMODES_PATCH
