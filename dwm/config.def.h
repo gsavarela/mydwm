@@ -1,4 +1,5 @@
 /* See LICENSE file for copyright and license details. */
+#include <X11/XF86keysym.h>
 
 /* appearance */
 #if ROUNDED_CORNERS_PATCH
@@ -1287,6 +1288,14 @@ static const Key keys[] = {
 	TAGKEYS(                        XK_8,                                  7)
 	TAGKEYS(                        XK_9,                                  8)
 
+    /* Extendend Padlock Functions */
+    { 0, XK_Print,                  spawn,          SHCMD("wm-screenshotgui") },
+    { ShiftMask, XK_Print,          spawn,          SHCMD("wm-screenshotfull") },
+    { 0, XF86XK_AudioRaiseVolume,   spawn,          SHCMD("pamixer -i 5 && pkill -RTMIN+5 dwmblocks") },
+    /* Special Keyboard Functions */
+    { 0, XF86XK_AudioRaiseVolume,   spawn,          SHCMD("pamixer -i 5 && pkill -RTMIN+5 dwmblocks") },
+    { 0, XF86XK_AudioLowerVolume,   spawn,          SHCMD("pamixer -d 5 && pkill -RTMIN+5 dwmblocks") },
+    { 0, XF86XK_AudioMute,          spawn,          SHCMD("pamixer -t && pkill -RTMIN+5 dwmblocks") },
 };
 
 #if KEYMODES_PATCH
