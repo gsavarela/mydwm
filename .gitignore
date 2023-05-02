@@ -1,7 +1,6 @@
 *.o
 dwm/dwm
 dwm/dwm-msg
-myst
 *config.h
 *patches.h
 *.orig
