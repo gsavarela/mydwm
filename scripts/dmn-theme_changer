@@ -11,7 +11,6 @@ change_theme()
 	cp ${dmenu_dir}/$1 ${dmenu_dir}/theme
 	cp ${st_dir}/$1 ${st_dir}/theme
 	
-	# xrdb -merge -I$HOME ~/.Xresources # reload Xresources
 	xrdb -merge -I$HOME ~/.config/X11/Xresources # reload Xresources
 
   # calls xrdb function in dwm
@@ -24,11 +23,17 @@ change_theme()
 change_gtk_theme() 
 {
    sed -e "s/^gtk-theme-name=.*/gtk-theme-name="$@"/" -i ~/.config/gtk-3.0/settings.ini
-   sed -e "s/^gtk-theme-name=.*/gtk-theme-name=\""$@"\"/" -i ~/.config/gtk-2.0/settings.ini
+   sed -e "s/^gtk-theme-name=.*/gtk-theme-name=\""$@"\"/" -i ~/.config/gtk-2.0/gtkrc
 }
 change_vim_theme()
 {
-  sed -i "s/colorscheme\ .*/colorscheme $@/" ~/.vimrc
+  sed -i "s/colorscheme\ .*/colorscheme\ "$1"/" ~/.config/vim/init/pl
+}
+change_nitrogen_theme()
+{
+  sed -i "s|file=.*|file=$@|" ~/.config/nitrogen/bg-saved.cfg
+
+  nitrogen --restore
 }
 
 # Theme
@@ -44,21 +49,27 @@ select="$(echo -e "$option" | dmenu -p "Choose a theme" )"
 
 case $select in
 	$theme1)
-		feh --random --bg-fill $HOME/.config/wallpaper/dracula
-		change_theme dracula
-		change_gtk_theme Dracula
+		# feh --random --bg-fill $HOME/.config/wallpaper/dracula
+    wallpaper=$(shuf -e $(ls -d -1 ~/.config/wallpaper/dracula/* | cut -d' ' -f10 ) | head -n1)
+    change_nitrogen_theme $wallpaper
+		change_gtk_theme dracula-gtk
 		change_vim_theme dracula
+		change_theme dracula
 		;;
 	$theme2)
-		feh --random --bg-fill $HOME/.config/wallpaper/gruvbox
-		change_theme gruvbox
-		change_gtk_theme Gruvbox-Dark
+		# feh --random --bg-fill $HOME/.config/wallpaper/gruvbox
+    wallpaper=$(shuf -e $(ls -d -1 ~/.config/wallpaper/gruvbox/* | cut -d' ' -f10 ) | head -n1)
+    change_nitrogen_theme $wallpaper
+		change_gtk_theme gruvbox-dark-gtk
 		change_vim_theme gruvbox
+		change_theme gruvbox
 		;;
 	$theme3)
-		feh --random --bg-fill $HOME/.config/wallpaper/nord
+		# feh --random --bg-fill $HOME/.config/wallpaper/nord
+    wallpaper=$(shuf -e $(ls -d -1 ~/.config/wallpaper/nord/* | cut -d' ' -f10 ) | head -n1)
+    change_nitrogen_theme $wallpaper
 		change_theme nord
-		change_gtk_theme Nord
 		change_vim_theme nord
+		change_gtk_theme nord-gtk
 		;;
 esac
