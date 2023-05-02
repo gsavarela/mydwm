@@ -6,3 +6,4 @@ dwm/dwm-msg
 *.orig
 *.rej
 **/theme
+dwmblocks/dwmblocks
