@@ -18,15 +18,15 @@
 #define orange1 #d65d0e
 #define orange2 #fe8019
 
-dwm.normfgcolor                : orange2
+dwm.normfgcolor                : white
 dwm.normbgcolor                : black
 dwm.normbordercolor            : black
-dwm.normfloatcolor             : gray1
+dwm.normfloatcolor             : white
 
-dwm.selfgcolor                 : blue1
-dwm.selbgcolor                 : black
-dwm.selbordercolor             : orange2
-dwm.selfloatcolor              : blue1
+dwm.selfgcolor                 : black
+dwm.selbgcolor                 : yellow1
+dwm.selbordercolor             : yellow1
+dwm.selfloatcolor              : black
 
 dwm.titlenormfgcolor           : gray1
 dwm.titlenormbgcolor           : black
@@ -38,15 +38,16 @@ dwm.titleselbgcolor            : black
 dwm.titleselbordercolor        : yellow1
 dwm.titleselfloatcolor         : blue1
 
-dwm.tagsnormfgcolor		         : black
-dwm.tagsnormbgcolor            : green1
-dwm.tagsnormbordercolor        : yellow1
-dwm.tagsnormfloatcolor         : black0
+dwm.tagsnormfgcolor		         : black   
+dwm.tagsnormbgcolor            : yellow2 
+dwm.tagsnormbordercolor        : yellow2 
+dwm.tagsnormfloatcolor         : black   
 
-dwm.tagsselfgcolor             : green1
-dwm.tagsselbgcolor             : black
-dwm.tagsselbordercolor         : aqua1
-dwm.tagsselfloatcolor          : black0
+
+dwm.tagsselfgcolor             : yellow2 
+dwm.tagsselbgcolor             : black   
+dwm.tagsselbordercolor         : yellow2 
+dwm.tagsselfloatcolor          : black   
 
 dwm.hidnormfgcolor             : red1
 dwm.hidselfgcolor              : red1
