@@ -1,15 +1,21 @@
 #!/bin/sh
+# Credits
+#
+# https://github.com/junnunkarim/dotfiles-linux
+#
 
 # Directory
 dwm_dir="$HOME/.config/dwm"
 dmenu_dir="$HOME/.config/dmenu"
 st_dir="$HOME/.config/st"
+zathura_dir="$HOME/.config/zathura"
 
 change_theme()
 {
 	cp ${dwm_dir}/$1 ${dwm_dir}/theme
 	cp ${dmenu_dir}/$1 ${dmenu_dir}/theme
 	cp ${st_dir}/$1 ${st_dir}/theme
+	cp ${zathura_dir}/theme/$1 ${zathura_dir}/theme.color
 	
 	xrdb -merge -I$HOME ~/.config/X11/Xresources # reload Xresources
 
