@@ -22,7 +22,6 @@
     ~/.config/st:  
       path: myst/xresources/*
       glob: True
-    ~/.config/X11/Xresources: Xresources
     ~/.local/bin:
       path: scripts/*
       glob: True
@@ -39,7 +38,6 @@
     - ~/.config/dwm
     - ~/.config/dmenu
     - ~/.config/st
-    - ~/.config/X11
     - ~/.local/bin
 
 - shell:
