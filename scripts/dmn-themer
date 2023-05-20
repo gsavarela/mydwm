@@ -53,6 +53,7 @@ theme1=" Dracula"
 theme2=" Gruvbox"
 theme3=" Nord"
 theme4=" Tokyo Night"
+theme5=" Rosé Pine"
 
 # Variable to pass to dmenu or rofi
 option="$cancel\n$theme1\n$theme2\n$theme3\n$theme4\n$theme5\n$theme6\n$theme7"
@@ -95,5 +96,14 @@ case $select in
 		change_vim_theme tokyonight
 		change_neovim_theme tokyonight
 		change_gtk_theme tokyonight-gtk
+		;;
+	$theme5)
+		# feh --random --bg-fill $HOME/.config/wallpaper/nord
+    wallpaper=$(shuf -e $(ls -d -1 ~/.config/wallpaper/rosepine/* | cut -d' ' -f10 ) | head -n1)
+    change_nitrogen_theme $wallpaper
+		change_theme rosepine
+		change_vim_theme rosepine
+		change_neovim_theme rose-pine
+		change_gtk_theme rose-pine-gtk
 		;;
 esac
