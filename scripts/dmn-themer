@@ -6,14 +6,12 @@
 
 # Directory
 dwm_dir="$HOME/.config/dwm"
-dmenu_dir="$HOME/.config/dmenu"
 st_dir="$HOME/.config/st"
 zathura_dir="$HOME/.config/zathura"
 
 change_theme()
 {
 	cp ${dwm_dir}/$1 ${dwm_dir}/theme
-	cp ${dmenu_dir}/$1 ${dmenu_dir}/theme
 	cp ${st_dir}/$1 ${st_dir}/theme
 	cp ${zathura_dir}/theme/$1 ${zathura_dir}/theme.color
 	
@@ -55,7 +53,7 @@ theme3=" Nord"
 theme4=" Tokyo Night"
 theme5=" Rosé Pine"
 
-# Variable to pass to dmenu or rofi
+# Variable to pass to dmenu
 option="$cancel\n$theme1\n$theme2\n$theme3\n$theme4\n$theme5\n$theme6\n$theme7"
 
 select="$(echo -e "$option" | dmenu -p "Choose a theme" )"
