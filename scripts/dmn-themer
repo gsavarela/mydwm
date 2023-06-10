@@ -52,6 +52,7 @@ theme2=" Gruvbox"
 theme3=" Nord"
 theme4=" Tokyo Night"
 theme5=" Rosé Pine"
+theme6=" Catppuccin Macchiato"
 
 # Variable to pass to dmenu
 option="$cancel\n$theme1\n$theme2\n$theme3\n$theme4\n$theme5\n$theme6\n$theme7"
@@ -103,5 +104,14 @@ case $select in
 		change_vim_theme rosepine
 		change_neovim_theme rose-pine
 		change_gtk_theme rose-pine-gtk
+		;;
+	$theme6)
+		# feh --random --bg-fill $HOME/.config/wallpaper/nord
+    wallpaper=$(shuf -e $(ls -d -1 ~/.config/wallpaper/catppuccin_macchiato/* | cut -d' ' -f10 ) | head -n1)
+    change_nitrogen_theme $wallpaper
+		change_theme catppuccin_macchiato
+		change_vim_theme catppuccin_macchiato
+		change_neovim_theme catppuccin
+		change_gtk_theme catppuccin-macchiato-gtk 
 		;;
 esac
