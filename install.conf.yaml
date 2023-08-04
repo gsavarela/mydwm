@@ -6,12 +6,6 @@
     link:
       create: true
       relink: true
-# - clean: 
-#     ~/.config:
-#       recursive: True
-#     ~/.local: 
-#       recursive: True
-
 - link:
     ~/.config/dwm: 
       path: dwm/xresources/*
@@ -23,11 +17,13 @@
       glob: True
     ~/.local/bin/dwm: dwm/dwm
     ~/.local/bin/dwmblocks: dwmblocks/dwmblocks
+    ~/.local/share/themes: themes
 
 
 - create:
     - ~/.config/dwm
     - ~/.local/bin
+    - ~/.local/share/themes
 
 - shell:
     - [git submodule update --init --recursive, Installing submodules]
