@@ -16,9 +16,6 @@
     ~/.config/dwm: 
       path: dwm/xresources/*
       glob: True
-    ~/.config/st:  
-      path: myst/xresources/*
-      glob: True
     ~/.config/gtk-2.0: gtk-2.0
     ~/.config/gtk-3.0: gtk-3.0
     ~/.local/bin:
@@ -26,12 +23,10 @@
       glob: True
     ~/.local/bin/dwm: dwm/dwm
     ~/.local/bin/dwmblocks: dwmblocks/dwmblocks
-    ~/.local/bin/st: myst/st
 
 
 - create:
     - ~/.config/dwm
-    - ~/.config/st
     - ~/.local/bin
 
 - shell:
