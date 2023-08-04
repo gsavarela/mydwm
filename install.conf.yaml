@@ -10,6 +10,7 @@
     ~/.config/dwm: 
       path: dwm/xresources/*
       glob: True
+    ~/.config/fontconfig/font.conf: fonts.conf
     ~/.config/gtk-2.0: gtk-2.0
     ~/.config/gtk-3.0: gtk-3.0
     ~/.local/bin:
@@ -17,12 +18,15 @@
       glob: True
     ~/.local/bin/dwm: dwm/dwm
     ~/.local/bin/dwmblocks: dwmblocks/dwmblocks
+    ~/.local/share/fonts: fonts
     ~/.local/share/themes: themes
 
 
 - create:
     - ~/.config/dwm
+    - ~/.config/fontconfig
     - ~/.local/bin
+    - ~/.local/share/fonts
     - ~/.local/share/themes
 
 - shell:
