@@ -24,8 +24,8 @@ dwm.normbordercolor            : black
 dwm.normfloatcolor             : white
 
 dwm.selfgcolor                 : black
-dwm.selbgcolor                 : yellow1
-dwm.selbordercolor             : yellow1
+dwm.selbgcolor                 : yellow2
+dwm.selbordercolor             : yellow2
 dwm.selfloatcolor              : black
 
 dwm.titlenormfgcolor           : gray1
@@ -35,18 +35,18 @@ dwm.titlenormfloatcolor        : gray1
 
 dwm.titleselfgcolor            : white
 dwm.titleselbgcolor            : black
-dwm.titleselbordercolor        : yellow1
+dwm.titleselbordercolor        : yellow2
 dwm.titleselfloatcolor         : blue1
 
 dwm.tagsnormfgcolor		         : black   
-dwm.tagsnormbgcolor            : yellow2 
-dwm.tagsnormbordercolor        : yellow2 
+dwm.tagsnormbgcolor            : yellow1 
+dwm.tagsnormbordercolor        : yellow1 
 dwm.tagsnormfloatcolor         : black   
 
 
-dwm.tagsselfgcolor             : yellow2 
+dwm.tagsselfgcolor             : yellow1 
 dwm.tagsselbgcolor             : black   
-dwm.tagsselbordercolor         : yellow2 
+dwm.tagsselbordercolor         : yellow1 
 dwm.tagsselfloatcolor          : black   
 
 dwm.hidnormfgcolor             : red1
