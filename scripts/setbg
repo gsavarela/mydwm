@@ -1,0 +1,204 @@
+#!/bin/sh
+#
+# Sets nitrogen wallpaper changing the style accordingly
+# applications: dwm, st, vim, neovim, gtk-2.0, gtk-3.0
+# supported themes: catpuccin macchiato, dracula, gruvbox, nord, tokyo night, rose pine, wal
+# Credits: 
+#
+# https://github.com/junnunkarim/dotfiles-linux
+#
+# if pywal is not installed, stop here
+# if ! command -v wal &> /dev/null; then; exit fi
+
+# space separated arguments
+template='wal'
+while [[ $# -gt 0 ]]; do
+  case $1 in
+    -t|--template)
+      template="$2"
+      shift # past argument
+      shift # past value
+      ;;
+    -*|--*)
+      echo "Unknown option $1"
+      exit 1
+      ;;
+    *)
+      wallpaper="$1" # save wallpaper
+      shift # past argument
+      ;;
+  esac
+done
+
+# Directory
+dwm_dir="$HOME/.config/dwm"
+st_dir="$HOME/.config/st"
+zathura_dir="$HOME/.config/zathura"
+pywal_dir="$HOME/.cache/wal"
+
+change_dwm_pywal() 
+{
+  
+source1="$HOME/.cache/wal/colors-wal-dwm.h" 
+source2="$HOME/.cache/wal/colors.Xresources"
+target="$HOME/.config/dwm/theme"
+grep static\ const\ char  $source1 | grep -v '*' | sed 's/static const char /dwm\./g' | sed 's/\ =/color\ :/' | tr -d '[]|_|;' >|  $target
+
+foreground=$(grep -e '^\*\.foreground' $source2 | cut -d: -f2 | tr -d ' ')
+background=$(grep -e '^\*\.background' $source2 | cut -d: -f2 | tr -d ' ')
+color2=$(grep -e '^\*\.color2' $source2 | cut -d: -f2 | tr -d ' ')
+color3=$(grep -e '^\*\.color3' $source2 | cut -d: -f2 | tr -d ' ')
+color4=$(grep -e '^\*\.color4' $source2 | cut -d: -f2 | tr -d ' ')
+color8=$(grep -e '^\*\.color8' $source2 | cut -d: -f2 | tr -d ' ')
+color11=$(grep -e '^\*\.color11' $source2 | cut -d: -f2 | tr -d ' ')
+
+# TODO: output this to stdout
+cat << EOF >> $target
+
+! missing float directives
+dwm.normfloatcolor            : ${foreground}
+dwm.selfloatcolor             : ${foreground}
+dwm.urgfloatcolor             : ${color2}
+
+
+! title normal directives
+dwm.titlenormfgcolor           : ${color8}
+dwm.titlenormbgcolor           : ${background}
+dwm.titlenormbordercolor       : ${background}
+dwm.titlenormfloatcolor        : ${color8}
+
+! title selected directives
+dwm.titleselfgcolor            : ${foreground}
+dwm.titleselbgcolor            : ${background}
+dwm.titleselbordercolor        : ${color11}
+dwm.titleselfloatcolor         : ${color4}
+
+! tag normal directives
+dwm.tagsnormfgcolor		         : ${background}
+dwm.tagsnormbgcolor            : ${color3}
+dwm.tagsnormbordercolor        : ${color3}
+dwm.tagsnormfloatcolor         : ${background}
+
+! tag selected directives
+dwm.tagsselfgcolor             : ${color3}
+dwm.tagsselbgcolor             : ${background}
+dwm.tagsselbordercolor         : ${color3}
+dwm.tagsselfloatcolor          : ${background}
+
+EOF
+}
+
+change_st_pywal()
+{
+  # copy color section only starting with `*.`
+  source=${pywal_dir}/colors.Xresources
+  target=${st_dir}/theme
+  grep -e '^\*' "${source}" >| "${target}"
+  # -e use regex expression, 
+  # >| overwrite if existing
+}
+change_theme()
+{
+
+  if [ "$1" = "wal" ] ; then
+    # silently degrades if pywal_dir doesn't exist.
+    [[ ! -d "${pywal_dir}" ]] && exit
+
+    change_dwm_pywal
+    change_st_pywal
+    zathura-pywal
+
+  else
+    cat ${dwm_dir}/$1 >| ${dwm_dir}/theme
+    cat  ${st_dir}/$1 >| ${st_dir}/theme
+    mv -f ${zathura_dir}/zathurarc ${zathura_dir}/zathurarc.bak && cat ${zathura_dir}/theme/$1 >| ${zathura_dir}/zathurarc
+  fi
+	
+  # reload Xresources
+  xrdb -merge -I$HOME ~/.config/X11/Xresources 
+
+  # calls xrdb function in dwm
+  kill -HUP $(pidof dwm)
+
+  # update st
+  kill -USR1 $(pidof st)
+
+}
+change_gtk_theme() 
+{
+   sed -e "s/^gtk-theme-name=.*/gtk-theme-name="$@"/" -i ~/.config/gtk-3.0/settings.ini
+   sed -e "s/^gtk-theme-name=.*/gtk-theme-name=\""$@"\"/" -i ~/.config/gtk-2.0/gtkrc
+}
+change_vim_theme()
+{
+  sed -i "s/colorscheme\ .*/colorscheme\ "$1"/" ~/.config/vim/init/plugins.vim
+}
+change_neovim_theme()
+{
+  sed -i "s/\[\[colorscheme\ .*\]\]/\[\[colorscheme $1\]\]/" ~/.config/nvim/lua/user/colorscheme.lua
+}
+change_nitrogen_theme()
+{
+  # MONITORS=$(($(xrandr --listmonitors | grep Monitors | cut -d: -f2 | tr -d '')-1))
+  MONITORS=$(xrandr --listmonitors | grep Monitors | cut -d: -f2 | tr -d '')
+  for i in $(seq 0 $MONITORS) 
+  do 
+    nitrogen --set-scaled $@ --head="$((i - 1))" --save
+  done
+
+}
+
+# process template options
+case $template in
+  'catppuccin macchiato')
+    vim_theme=catppuccin_macchiato
+    neovim_theme=catppuccin
+    gtk_theme=catppuccin-macchiato-gtk 
+		theme=catppuccin_macchiato
+    ;;
+  'dracula')
+		gtk_theme=dracula-gtk
+		vim_theme=dracula
+		neovim_theme=dracula
+		theme=dracula
+		;;
+  'gruvbox')
+		vim_theme=gruvbox
+		neovim_theme=gruvbox-baby
+		gtk_theme=gruvbox-dark-gtk
+		theme=gruvbox
+		;;
+  'nord')
+		vim_theme=nord
+		neovim_theme=nord
+		gtk_theme=nord-gtk
+		theme=nord
+		;;
+  'tokyo night')
+		vim_theme=tokyonight
+		neovim_theme=tokyonight
+		gtk_theme=tokyonight-gtk
+		theme=tokyonight
+		;;
+  'rose pine')
+		vim_theme=rosepine
+		neovim_theme=rose-pine
+		gtk_theme=rose-pine-gtk
+		theme=rosepine
+		;;
+  *)
+		vim_theme=wal
+		neovim_theme=pywal
+		gtk_theme=wal-gtk
+	  theme=wal
+    ;;
+  esac
+echo $template 
+change_nitrogen_theme $wallpaper
+[[ $theme == 'wal' ]] && wal -c && wal -i $wallpaper
+change_theme $theme
+change_vim_theme $vim_theme 
+change_neovim_theme $neovim_theme
+change_gtk_theme $gtk_theme
+# wal -i changes resolution -- force nitrogen settings 
+change_nitrogen_theme $wallpaper  

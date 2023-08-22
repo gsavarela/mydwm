@@ -8,42 +8,7 @@
 dwm_dir="$HOME/.config/dwm"
 st_dir="$HOME/.config/st"
 zathura_dir="$HOME/.config/zathura"
-
-change_theme()
-{
-	cp ${dwm_dir}/$1 ${dwm_dir}/theme
-	cp ${st_dir}/$1 ${st_dir}/theme
-	cp ${zathura_dir}/theme/$1 ${zathura_dir}/theme.color
-	
-	xrdb -merge -I$HOME ~/.config/X11/Xresources # reload Xresources
-
-  # calls xrdb function in dwm
-  kill -HUP $(pidof dwm)
-
-  # update st
-  kill -USR1 $(pidof st)
-
-}
-change_gtk_theme() 
-{
-   sed -e "s/^gtk-theme-name=.*/gtk-theme-name="$@"/" -i ~/.config/gtk-3.0/settings.ini
-   sed -e "s/^gtk-theme-name=.*/gtk-theme-name=\""$@"\"/" -i ~/.config/gtk-2.0/gtkrc
-}
-change_vim_theme()
-{
-  sed -i "s/colorscheme\ .*/colorscheme\ "$1"/" ~/.config/vim/init/plugins.vim
-}
-change_neovim_theme()
-{
-  # sed -i "s/colorscheme\ [^\]]*/colorscheme\ "$1"/" ~/.config/nvim/lua/user/colorscheme.lua
-  sed -i "s/\[\[colorscheme\ .*\]\]/\[\[colorscheme $1\]\]/" ~/.config/nvim/lua/user/colorscheme.lua
-}
-change_nitrogen_theme()
-{
-  sed -i "s|file=.*|file=$@|" ~/.config/nitrogen/bg-saved.cfg
-
-  nitrogen --restore
-}
+pywal_dir="$HOME/.cache/wal"
 
 # Theme
 cancel="窱 Cancel"
@@ -53,6 +18,7 @@ theme3=" Nord"
 theme4=" Tokyo Night"
 theme5=" Rosé Pine"
 theme6=" Catppuccin Macchiato"
+theme7=" Pywal"
 
 # Variable to pass to dmenu
 option="$cancel\n$theme1\n$theme2\n$theme3\n$theme4\n$theme5\n$theme6\n$theme7"
@@ -61,57 +27,33 @@ select="$(echo -e "$option" | dmenu -p "Choose a theme" )"
 
 case $select in
 	$theme1)
-		# feh --random --bg-fill $HOME/.config/wallpaper/dracula
     wallpaper=$(shuf -e $(ls -d -1 ~/.config/wallpaper/dracula/* | cut -d' ' -f10 ) | head -n1)
-    change_nitrogen_theme $wallpaper
-		change_gtk_theme dracula-gtk
-		change_vim_theme dracula
-		change_neovim_theme dracula
-		change_theme dracula
+    template='dracula'
 		;;
 	$theme2)
-		# feh --random --bg-fill $HOME/.config/wallpaper/gruvbox
     wallpaper=$(shuf -e $(ls -d -1 ~/.config/wallpaper/gruvbox/* | cut -d' ' -f10 ) | head -n1)
-    change_nitrogen_theme $wallpaper
-		change_gtk_theme gruvbox-dark-gtk
-		change_vim_theme gruvbox
-		change_neovim_theme gruvbox-baby
-		change_theme gruvbox
+    template='gruvbox'
 		;;
 	$theme3)
-		# feh --random --bg-fill $HOME/.config/wallpaper/nord
     wallpaper=$(shuf -e $(ls -d -1 ~/.config/wallpaper/nord/* | cut -d' ' -f10 ) | head -n1)
-    change_nitrogen_theme $wallpaper
-		change_theme nord
-		change_vim_theme nord
-		change_neovim_theme nord
-		change_gtk_theme nord-gtk
+    template='nord'
 		;;
 	$theme4)
-		# feh --random --bg-fill $HOME/.config/wallpaper/nord
     wallpaper=$(shuf -e $(ls -d -1 ~/.config/wallpaper/tokyo-night/* | cut -d' ' -f10 ) | head -n1)
-    change_nitrogen_theme $wallpaper
-		change_theme tokyonight
-		change_vim_theme tokyonight
-		change_neovim_theme tokyonight
-		change_gtk_theme tokyonight-gtk
+    template='tokyo night'
 		;;
 	$theme5)
-		# feh --random --bg-fill $HOME/.config/wallpaper/nord
     wallpaper=$(shuf -e $(ls -d -1 ~/.config/wallpaper/rosepine/* | cut -d' ' -f10 ) | head -n1)
-    change_nitrogen_theme $wallpaper
-		change_theme rosepine
-		change_vim_theme rosepine
-		change_neovim_theme rose-pine
-		change_gtk_theme rose-pine-gtk
+    template='rose pine'
 		;;
 	$theme6)
-		# feh --random --bg-fill $HOME/.config/wallpaper/nord
     wallpaper=$(shuf -e $(ls -d -1 ~/.config/wallpaper/catppuccin_macchiato/* | cut -d' ' -f10 ) | head -n1)
-    change_nitrogen_theme $wallpaper
-		change_theme catppuccin_macchiato
-		change_vim_theme catppuccin_macchiato
-		change_neovim_theme catppuccin
-		change_gtk_theme catppuccin-macchiato-gtk 
+    template='catppuccin macchiato'
+		;;
+	$theme7)
+    wallpaper=$(find "${HOME}/Pictures/Wallpapers" -type f -iname "*.jpg" -o -iname "*png" | shuf -n1)
+    template='wal'
 		;;
 esac
+
+setbg $wallpaper --template "${template}"
