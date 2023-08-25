@@ -5,3 +5,5 @@ dwm/dwm-msg
 *patches.h
 *.orig
 *.rej
+**/theme
+dwmblocks/dwmblocks

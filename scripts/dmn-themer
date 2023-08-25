@@ -1,0 +1,62 @@
+#!/bin/sh
+# Credits
+#
+# https://github.com/junnunkarim/dotfiles-linux
+#
+
+# Directory
+dwm_dir="$HOME/.config/dwm"
+st_dir="$HOME/.config/st"
+zathura_dir="$HOME/.config/zathura"
+pywal_dir="$HOME/.cache/wal"
+
+# Theme
+cancel="窱 Cancel"
+theme1=" Dracula"
+theme2=" Gruvbox"
+theme3=" Nord"
+theme4=" Tokyo Night"
+theme5=" Rosé Pine"
+theme6=" Catppuccin Macchiato"
+theme7=" Pywal"
+
+# Variable to pass to dmenu
+option="$cancel\n$theme1\n$theme2\n$theme3\n$theme4\n$theme5\n$theme6\n$theme7"
+
+select="$(echo -e "$option" | dmenu -p "Choose a theme" )"
+
+case $select in
+	$theme1)
+    wallpaper=$(shuf -e $(ls -d -1 ~/.config/wallpaper/dracula/* | cut -d' ' -f10 ) | head -n1)
+    template='dracula'
+		;;
+	$theme2)
+    wallpaper=$(shuf -e $(ls -d -1 ~/.config/wallpaper/gruvbox/* | cut -d' ' -f10 ) | head -n1)
+    template='gruvbox'
+		;;
+	$theme3)
+    wallpaper=$(shuf -e $(ls -d -1 ~/.config/wallpaper/nord/* | cut -d' ' -f10 ) | head -n1)
+    template='nord'
+		;;
+	$theme4)
+    wallpaper=$(shuf -e $(ls -d -1 ~/.config/wallpaper/tokyo-night/* | cut -d' ' -f10 ) | head -n1)
+    template='tokyo night'
+		;;
+	$theme5)
+    wallpaper=$(shuf -e $(ls -d -1 ~/.config/wallpaper/rosepine/* | cut -d' ' -f10 ) | head -n1)
+    template='rose pine'
+		;;
+	$theme6)
+    wallpaper=$(shuf -e $(ls -d -1 ~/.config/wallpaper/catppuccin_macchiato/* | cut -d' ' -f10 ) | head -n1)
+    template='catppuccin macchiato'
+		;;
+	$theme7)
+    wallpaper=$(find "${HOME}/Pictures/Wallpapers" -type f -iname "*.jpg" -o -iname "*png" | shuf -n1)
+    template='wal'
+		;;
+  *)
+    exit 1  # User cancel
+    ;;
+esac
+
+setbg $wallpaper --template "${template}"

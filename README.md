@@ -1,14 +1,68 @@
 # My Dynamic Window Manager
 
-Uses [dwm-flexipatch](https://github.com/bakkeby/dwm-flexipatch) as dwm version.
-Uses [dwmblocks-async](#dwmblocks-async) as status bar.
+* Features a theme selector (credits: [Junnunkarim](https://github.com/junnunkarim/dotfiles-linux)).
+* Uses [dwm-flexipatch](https://github.com/bakkeby/dwm-flexipatch) as dwm version.
+* Uses [dmenu-flexipatch](https://github.com/bakkeby/dmenu-flexipatch) as program launcher.
+* Uses [dwmblocks-async](#dwmblocks-async) as status bar.
+* Assumes [st](https://github.com/gsavarela/myst) as terminal application. But it's open to changes.
 
-## Compile Suckless Tools
+Supported themes (credits: [Junnunkarim](https://github.com/junnunkarim/dotfiles-linux)):
+
+* [Dracula](https://draculatheme.com/)
+* [Gruvbox]()
+* [Nord](https://www.nordtheme.com/)
+* [Tokyo Night](https://github.com/folke/tokyonight.nvim)
+* [Rosé Pine](https://rosepinetheme.com/)
+* [Catppuccin Macchiato](https://github.com/catppuccin/catppuccin)
+* [Pywal](https://github.com/dylanaraps/pywal)
+
+Supported programs:
+
+* dwm 
+* dmenu
+* st
+* GTK
+* vim
+* neovim
+* zathura
+
+## Installation
+
+### 1. Dependencies:
+#### 1.1 Add [dotbot](https://github.com/anishathalye/dotbot) as a submodule.
+
+```
+git submodule add https://github.com/anishathalye/dotbot
+git config -f .gitmodules submodule.dotbot.ignore dirty # ignore dirty commits in the submodule
+cp dotbot/tools/git-submodule/install .
+```
+
+#### 1.2 Add a terminal, *e.g*, [myst](https://github.com/gsavarela/myst).
+
+```
+git clone https://github.com/gsavarela/myst
+cd myst && sudo make clean install
+```
+
+### 2. Compile Suckless Tools
 
 ```
 cd dwm && sudo make clean install && cd .. \
 cd dwmblocks && sudo make clean install && cd .. \
 ```
+
+### 3. Bootstrap build 
+
+The install script should generate symlinks to  `~/.config` and `~/.local` folder. 
+
+```
+./install.sh
+```
+
+### 4. Xinitrc
+
+You may wish to add the following command on your `.xinirc` or `.config/X11/xinitrc` files:
+
 
 ## Dwm Flexipatch
 
@@ -32,24 +86,6 @@ VANITYGAPS_MONOCLE_PATCH 1
 XRDB_PATCH 1
 ```
 
-Include a theme selector with support for themes:
-> ./scripts/theme_selector
-
-Themes:
-
-* dracula
-* gruvbox
-* nord 
-
-Programs:
-
-* dwm 
-* dmenu
-* st
-* GTK
-* vim
- 
-
 Known dependencies:
 
 * [dmenu](https://tools.suckless.org/dmenu/)
@@ -60,7 +96,6 @@ Known dependencies:
 
 A modular statusbar for `dwm` written in C. You may think of it as `i3blocks`, but for `dwm`.
 Credits to [UtkarshVerma](https://github.com/UtkarshVerma/dwmblocks-async) 
-
 
 ### Features
 
@@ -74,7 +109,9 @@ Credits to [UtkarshVerma](https://github.com/UtkarshVerma/dwmblocks-async)
 
 ## TODO:
 
-- Add myst as git sub module.
-- Add dotbot bootstrap script. 
-- Add more fonts.
-- Add more themes.
+- ~~[x] Add myst as git sub module.~~
+- [x] Add dotbot bootstrap script. 
+- [x] Add more fonts.
+- [x] Add more themes.
+- [] Add another bar.
+
