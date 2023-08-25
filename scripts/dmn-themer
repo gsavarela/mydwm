@@ -54,6 +54,9 @@ case $select in
     wallpaper=$(find "${HOME}/Pictures/Wallpapers" -type f -iname "*.jpg" -o -iname "*png" | shuf -n1)
     template='wal'
 		;;
+  *)
+    exit 1  # User cancel
+    ;;
 esac
 
 setbg $wallpaper --template "${template}"
