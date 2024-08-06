@@ -135,7 +135,9 @@ change_vim_theme()
 }
 change_neovim_theme()
 {
-  sed -i "s/\[\[colorscheme\ .*\]\]/\[\[colorscheme $1\]\]/" ~/.config/nvim/lua/user/colorscheme.lua
+  # sed -i "s/\[\[colorscheme\ .*\]\]/\[\[colorscheme $1\]\]/" ~/.config/nvim/lua/user/colorscheme.lua
+  sed -i "s/theme = \".*\"/theme = \"$1\"/" ~/.config/nvim/lua/chadrc.lua
+
 }
 change_nitrogen_theme()
 {
@@ -159,12 +161,12 @@ case $template in
   'dracula')
 		gtk_theme=dracula-gtk
 		vim_theme=dracula
-		neovim_theme=dracula
+		neovim_theme=chadracula
 		theme=dracula
 		;;
   'gruvbox')
 		vim_theme=gruvbox
-		neovim_theme=gruvbox-baby
+		neovim_theme=gruvchad
 		gtk_theme=gruvbox-dark-gtk
 		theme=gruvbox
 		;;
@@ -182,7 +184,7 @@ case $template in
 		;;
   'rose pine')
 		vim_theme=rosepine
-		neovim_theme=rose-pine
+		neovim_theme=rosepine
 		gtk_theme=rose-pine-gtk
 		theme=rosepine
 		;;
